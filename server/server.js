@@ -5,19 +5,38 @@
  * Module dependencies.
  * @type {exports}
  */
-/** TODO: Define variables */
+
+var fs = require('fs'),
+    http = require('http'),
+    express = require('express'),
+    bodyParser = require('body-parser'),
+    env,
+    config,
+    mongoose,
+    models_path,
+    models_files,
+    app,
+    routes_files;
+
 
 /**
  * Load configuration
  * @type {*|string}
  */
-/** TODO: Load configuration */
-
+env = process.env.NODE_ENV || 'development';
+config = require('./config/config.js') [env];
 /**
  * Bootstrap db connection
  * @type {exports}
  */
-/** TODO: Define database connection */
+mongoose = require('mongoose');
+mongoose.connect('config.db');
+
+//Debugging
+mongoose.connection.on('error', function (err)){
+    console.error('MongoDB error: %s', err);
+});
+mongoose.set('debug', config.debug);
 
 
 /**
